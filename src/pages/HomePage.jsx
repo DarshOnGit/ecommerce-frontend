@@ -1,16 +1,17 @@
-
-import axios from 'axios'
+import { useEffect ,useState } from "react";
+import axios from "axios";
 import { Header } from "../Components/Header";
 import CheckMarkIcon from "../assets/images/icons/checkmark.png";
-import { products } from "../data/products";
+
 import "./HomePage.css";
 
 export function HomePage() {
-  axios.get('http://localhost:3000/api/products')
-    .then((response)=>{
-      console.log(response.data)
-    })
-
+  const [products , setProducts] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/api/products").then((response) => {
+      setProducts(response.data);
+    });
+  },[])
   return (
     <>
       <link rel="icon" href="home-favicon.png" />
@@ -24,10 +25,7 @@ export function HomePage() {
             return (
               <div className="product-container" key={product.id}>
                 <div className="product-image-container">
-                  <img
-                    className="product-image"
-                    src={product.image}
-                  />
+                  <img className="product-image" src={product.image} />
                 </div>
 
                 <div className="product-name limit-text-to-2-lines">
@@ -44,7 +42,9 @@ export function HomePage() {
                   </div>
                 </div>
 
-                <div className="product-price">${(product.priceCents / 100).toFixed(2)}</div>
+                <div className="product-price">
+                  ${(product.priceCents / 100).toFixed(2)}
+                </div>
 
                 <div className="product-quantity-container">
                   <select>
@@ -74,7 +74,6 @@ export function HomePage() {
               </div>
             );
           })}
-          
         </div>
       </div>
     </>
