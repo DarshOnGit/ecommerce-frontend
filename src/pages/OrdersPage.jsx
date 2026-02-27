@@ -3,13 +3,13 @@ import { Header } from "../Components/Header";
 import BuyagainIcon from '../assets/images/icons/buy-again.png'
 import "./OrdersPage.css";
 
-export function OrdersPage() {
+export function OrdersPage({cart}) {
   return (
     <>
       <link rel="icon" href="orders-favicon.png" />
       <title>Checkout</title>
 
-      <Header />
+      <Header cart={cart}/>
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
