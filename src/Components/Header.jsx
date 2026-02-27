@@ -9,7 +9,6 @@ import './Header.css'
 export function Header({cart}) {
 
   let totalQuantity = 0;
-  console.log(totalQuantity)
   cart.forEach((cartItem)=>{
     totalQuantity+=cartItem.quantity;
   });
