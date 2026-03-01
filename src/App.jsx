@@ -3,7 +3,7 @@ import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/checkout/CheckoutPage";
 import { OrdersPage } from "./pages/Orders/OrdersPage";
 import { TrackingPage } from "./pages/tracking/TrackingPage";
-import { NotFound } from "./pages/NotFoundPage";
+import { NotFound } from "./pages/notFound/NotFoundPage";
 import "./App.css";
 import { useState , useEffect } from "react";
 import axios from "axios";
@@ -12,10 +12,11 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/cart-items?expand=product").then((response) => {
-      console.log(response.data)
+    const fetchAppData = async()=>{
+      const response = await axios.get("/api/cart-items?expand=product");
       setCart(response.data);
-    });
+    }
+    fetchAppData();
   },[]);
 
   return (

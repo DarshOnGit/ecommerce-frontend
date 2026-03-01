@@ -4,16 +4,18 @@ import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 import { Link } from "react-router";
 import { Header } from "../../Components/Header";
-import BuyagainIcon from "../assets/images/icons/buy-again.png";
+import BuyagainIcon from "../../assets/images/icons/buy-again.png";
 import "./OrdersPage.css";
 
 export function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    const fetchOrdersData = async()=>{
+      const response = await axios.get("/api/orders?expand=products");
       setOrders(response.data);
-    });
+    }
+    fetchOrdersData();
   }, []);
   return (
     <>
